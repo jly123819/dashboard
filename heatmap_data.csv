@@ -1,0 +1,41 @@
+Genre,Audio Feature,Relative Level
+barbadian pop,Acousticness,-0.4347
+barbadian pop,Danceability,0.2048
+barbadian pop,Energy,0.2473
+barbadian pop,Valence,0.4912
+big room,Acousticness,-0.7295
+big room,Danceability,-0.0126
+big room,Energy,1.0264
+big room,Valence,-0.6233
+boy band,Acousticness,-0.6874
+boy band,Danceability,0.5279
+boy band,Energy,1.2999
+boy band,Valence,1.3869
+british soul,Acousticness,0.8708
+british soul,Danceability,-1.5358
+british soul,Energy,-1.3027
+british soul,Valence,-1.2387
+canadian contemporary r&b,Acousticness,-0.3146
+canadian contemporary r&b,Danceability,-1.1951
+canadian contemporary r&b,Energy,-0.0818
+canadian contemporary r&b,Valence,-1.3299
+canadian pop,Acousticness,-0.0458
+canadian pop,Danceability,0.5158
+canadian pop,Energy,0.2162
+canadian pop,Valence,0.9544
+dance pop,Acousticness,-0.6893
+dance pop,Danceability,0.9327
+dance pop,Energy,0.6362
+dance pop,Valence,0.7825
+electropop,Acousticness,-0.452
+electropop,Danceability,0.6942
+electropop,Energy,-0.0413
+electropop,Valence,-0.3235
+neo mellow,Acousticness,2.688
+neo mellow,Danceability,-1.5264
+neo mellow,Energy,-2.2326
+neo mellow,Valence,-1.1703
+pop,Acousticness,-0.2054
+pop,Danceability,1.3945
+pop,Energy,0.2324
+pop,Valence,1.0707
