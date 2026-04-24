@@ -34,11 +34,7 @@ app.layout = html.Div(
            'fontFamily': 'Arial, sans-serif', 'padding': '24px 32px'},
     children=[
 
-    html.H1('Spotify Top 10s  (2010–2019)',
-            style={'color': WHITE, 'fontSize': '24px',
-                   'fontWeight': '700', 'margin': '0 0 4px 0'}),
-    html.P('Interactive audio feature explorer',
-           style={'color': MUTED, 'fontSize': '12px', 'margin': '0 0 20px 0'}),
+   
 
     # ── ROW 1: Compare box (left) + Bump chart (right) ────────────────────────
     html.Div(style={'display': 'flex', 'gap': '20px', 'marginBottom': '20px'}, children=[
