@@ -25,6 +25,13 @@ WHITE = '#EEEEFF'
 GRID  = '#1E2233'
 RED   = '#FF6B6B'
 
+# Chart-specific colors (white background theme)
+CHART_BG   = '#FFFFFF'
+CHART_PLOT = '#F8F9FA'
+CHART_TEXT = '#1A1A2E'
+CHART_MUTED = '#555577'
+CHART_GRID = '#E0E0EE'
+
 # ── App ────────────────────────────────────────────────────────────────────────
 app = dash.Dash(__name__)
 app.title = 'Spotify Dashboard'
@@ -33,8 +40,6 @@ app.layout = html.Div(
     style={'backgroundColor': BG, 'minHeight': '100vh',
            'fontFamily': 'Arial, sans-serif', 'padding': '24px 32px'},
     children=[
-
-   
 
     # ── ROW 1: Compare box (left) + Bump chart (right) ────────────────────────
     html.Div(style={'display': 'flex', 'gap': '20px', 'marginBottom': '20px'}, children=[
@@ -300,19 +305,19 @@ def update_violin(highlight):
     ))
 
     fig.update_layout(
-        paper_bgcolor=BG, plot_bgcolor=CARD,
-        font=dict(color=WHITE),
+        paper_bgcolor=CHART_BG, plot_bgcolor=CHART_PLOT,
+        font=dict(color=CHART_TEXT),
         margin=dict(l=55, r=20, t=10, b=50),
         xaxis=dict(tickvals=list(range(len(years))),
                    ticktext=[str(y) for y in years],
-                   gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED)),
+                   gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=MUTED)),
         yaxis=dict(title='Danceability Score', range=[18, 108],
-                   gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED)),
+                   gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=MUTED)),
         showlegend=True,
         legend=dict(orientation='h', y=-0.18, x=0.5, xanchor='center',
-                    bgcolor='rgba(0,0,0,0)', font=dict(size=10, color=MUTED)),
+                    bgcolor='rgba(248,249,250,0.9)', font=dict(size=10, color=MUTED)),
     )
     return fig
 
@@ -367,14 +372,14 @@ def update_heatmap(selected, sort_by, hl_genre):
         x=col_order,
         y=genres_list,
         text=text_matrix,
-        colorscale=[[0, '#0A1A0E'], [0.45, '#1A2D20'], [1, GREEN]],
+        colorscale=[[0, '#000000'], [0.5, '#E8E8E8'], [1, '#1DB954']],
         zmin=zmin, zmax=zmax,
         hovertemplate='%{text}<extra></extra>',
         colorbar=dict(
             thickness=12, len=0.85,
-            tickfont=dict(color=MUTED, size=10),
-            outlinecolor=GRID,
-            title=dict(text='Relative<br>Level', font=dict(color=MUTED, size=10)),
+            tickfont=dict(color=CHART_MUTED, size=10),
+            outlinecolor=CHART_GRID,
+            title=dict(text='Relative<br>Level', font=dict(color=CHART_MUTED, size=10)),
         ),
     ))
 
@@ -390,16 +395,16 @@ def update_heatmap(selected, sort_by, hl_genre):
         )
 
     fig.update_layout(
-        paper_bgcolor=BG, plot_bgcolor=CARD,
-        font=dict(color=WHITE),
+        paper_bgcolor=CHART_BG, plot_bgcolor=CHART_PLOT,
+        font=dict(color=CHART_TEXT),
         margin=dict(l=10, r=60, t=10, b=55),
         xaxis=dict(
-            side='bottom', gridcolor=GRID, linecolor=GRID,
-            tickfont=dict(color=WHITE, size=12),
+            side='bottom', gridcolor=CHART_GRID, linecolor=CHART_GRID,
+            tickfont=dict(color=CHART_TEXT, size=12),
         ),
         yaxis=dict(
-            gridcolor=GRID, linecolor=GRID,
-            tickfont=dict(color=WHITE, size=11),
+            gridcolor=CHART_GRID, linecolor=CHART_GRID,
+            tickfont=dict(color=CHART_TEXT, size=11),
             automargin=True,
         ),
     )
@@ -425,7 +430,7 @@ def update_scatter(feature, yr_range):
             colorscale=[[0, '#158B3E'], [1, '#84EFA8']],
             size=7, opacity=0.72,
             colorbar=dict(title='Year', thickness=10,
-                          tickfont=dict(color=MUTED, size=9),
+                          tickfont=dict(color=CHART_MUTED, size=9),
                           outlinecolor=GRID),
         ),
         hovertemplate=(
@@ -453,16 +458,16 @@ def update_scatter(feature, yr_range):
         ))
 
     fig.update_layout(
-        paper_bgcolor=BG, plot_bgcolor=CARD,
-        font=dict(color=WHITE),
+        paper_bgcolor=CHART_BG, plot_bgcolor=CHART_PLOT,
+        font=dict(color=CHART_TEXT),
         margin=dict(l=55, r=20, t=10, b=50),
-        xaxis=dict(title=feature, gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED)),
-        yaxis=dict(title='Popularity', gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED)),
+        xaxis=dict(title=feature, gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=MUTED)),
+        yaxis=dict(title='Popularity', gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=MUTED)),
         showlegend=True,
         legend=dict(orientation='h', y=-0.22, x=0.5, xanchor='center',
-                    bgcolor='rgba(0,0,0,0)', font=dict(size=10, color=MUTED)),
+                    bgcolor='rgba(248,249,250,0.9)', font=dict(size=10, color=MUTED)),
     )
     return fig
 
@@ -531,7 +536,7 @@ def update_compare(feature, sel_year):
         # Median
         fig.add_trace(go.Scatter(
             x=[x_center-bw, x_center+bw], y=[med, med],
-            mode='lines', line=dict(color=WHITE, width=3.5),
+            mode='lines', line=dict(color='#1A1A2E', width=3.5),
             hovertemplate=hover, showlegend=False, name=label,
         ))
         # Invisible hover zone covering full box height for easy access
@@ -569,19 +574,19 @@ def update_compare(feature, sel_year):
 
     fig = go.Figure()
     _, all_med, _, _, _, _, _ = draw_box(fig, all_data,  x_center=0.5, color=GREEN,       label='All Years')
-    _, yr_med,  _, _, _, _, _ = draw_box(fig, yr_data,   x_center=1.5, color='#4CC9F0',   label=str(sel_year))
+    _, yr_med,  _, _, _, _, _ = draw_box(fig, yr_data,   x_center=1.5, color='#1a3a6b',   label=str(sel_year))
 
     # Annotation: median difference
     diff  = yr_med - all_med
     sign  = '+' if diff >= 0 else ''
     arrow = '▲' if diff > 0 else ('▼' if diff < 0 else '—')
-    color_ann = '#4CC9F0' if diff > 0 else RED if diff < 0 else MUTED
+    color_ann = '#1a3a6b' if diff > 0 else RED if diff < 0 else MUTED
     fig.add_annotation(
         x=1.0, y=max(all_med, yr_med) + 4,
         text=f'{arrow}  {sel_year} median is <b>{sign}{diff:.1f}</b> vs overall',
         showarrow=False,
         font=dict(color=color_ann, size=12),
-        bgcolor='rgba(15,17,23,0.75)',
+        bgcolor='rgba(248,249,250,0.9)',
         bordercolor=color_ann, borderwidth=1,
         borderpad=6,
     )
@@ -595,19 +600,19 @@ def update_compare(feature, sel_year):
                   line=dict(color=GRID, width=1.5, dash='dot'))
 
     fig.update_layout(
-        paper_bgcolor=BG, plot_bgcolor=CARD,
-        font=dict(color=WHITE),
+        paper_bgcolor=CHART_BG, plot_bgcolor=CHART_PLOT,
+        font=dict(color=CHART_TEXT),
         margin=dict(l=55, r=20, t=30, b=40),
         xaxis=dict(
             tickvals=[0.5, 1.5],
             ticktext=[f'All Years<br>(n={len(all_data)})',
                       f'{sel_year}<br>(n={len(yr_data)})'],
-            tickfont=dict(color=WHITE, size=12),
-            gridcolor=GRID, linecolor=GRID, zerolinecolor='rgba(0,0,0,0)',
+            tickfont=dict(color=CHART_TEXT, size=12),
+            gridcolor=CHART_GRID, linecolor=CHART_GRID, zerolinecolor='rgba(0,0,0,0)',
             range=[0, 2],
         ),
-        yaxis=dict(title=feature, gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED)),
+        yaxis=dict(title=feature, gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=MUTED)),
     )
     return fig
 
@@ -769,8 +774,8 @@ def update_gmap(topn, x_feat, y_feat, hl_genre):
         fig.add_annotation(
             x=lx, y=ly, text=genre,
             showarrow=False, xanchor=ha, yanchor=va,
-            font=dict(color=WHITE, size=10),
-            bgcolor='rgba(15,17,23,0.55)',
+            font=dict(color=CHART_TEXT, size=10),
+            bgcolor='rgba(248,249,250,0.85)',
             borderpad=2,
         )
 
@@ -810,9 +815,9 @@ def update_gmap(topn, x_feat, y_feat, hl_genre):
         if opacities[top_i] > 0.5:
             fig.add_annotation(
                 x=x_vals[top_i], y=y_vals[top_i],
-                text=f'★',
+                text='★',
                 showarrow=False, xanchor='center', yanchor='middle',
-                font=dict(color='#F9C74F', size=14),
+                font=dict(color='#FF4500', size=16, family='Arial'),
             )
 
     # Colorbar (inside right margin, not clipped)
@@ -822,13 +827,13 @@ def update_gmap(topn, x_feat, y_feat, hl_genre):
             colorscale=[[0, 'rgb(29,64,40)'], [1, GREEN]],
             color=[0, 1], showscale=True,
             colorbar=dict(
-                title=dict(text='Avg Pop', font=dict(color=MUTED, size=9),
+                title=dict(text='Avg Pop', font=dict(color=CHART_MUTED, size=9),
                            side='right'),
                 thickness=10, len=0.55, x=1.01,
-                tickfont=dict(color=MUTED, size=9),
+                tickfont=dict(color=CHART_MUTED, size=9),
                 tickvals=[0, 1],
                 ticktext=[f'{pop_min:.0f}', f'{pop_max:.0f}'],
-                outlinecolor=GRID,
+                outlinecolor=CHART_GRID,
             ),
         ),
         showlegend=False, hoverinfo='skip',
@@ -839,18 +844,18 @@ def update_gmap(topn, x_feat, y_feat, hl_genre):
         x=0.01, y=0.99, xref='paper', yref='paper',
         text='● size = song count',
         showarrow=False, xanchor='left', yanchor='top',
-        font=dict(color=MUTED, size=9),
+        font=dict(color=CHART_MUTED, size=9),
     )
 
     fig.update_layout(
-        paper_bgcolor=BG, plot_bgcolor=CARD,
-        font=dict(color=WHITE),
+        paper_bgcolor=CHART_BG, plot_bgcolor=CHART_PLOT,
+        font=dict(color=CHART_TEXT),
         margin=dict(l=55, r=70, t=10, b=50),
-        xaxis=dict(title=x_feat, gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED, size=11),
+        xaxis=dict(title=x_feat, gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=CHART_MUTED, size=11),
                    range=[x_lo, x_hi]),
-        yaxis=dict(title=y_feat, gridcolor=GRID, linecolor=GRID,
-                   zerolinecolor=GRID, tickfont=dict(color=MUTED, size=11),
+        yaxis=dict(title=y_feat, gridcolor=CHART_GRID, linecolor=CHART_GRID,
+                   zerolinecolor=CHART_GRID, tickfont=dict(color=CHART_MUTED, size=11),
                    range=[y_lo, y_hi]),
         hovermode='closest',
     )
